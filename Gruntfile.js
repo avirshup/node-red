@@ -237,7 +237,7 @@ module.exports = function(grunt) {
                 files: [
                     'editor/js/**/*.js'
                 ],
-                tasks: ['copy:build','concat','uglify','attachCopyright:js']
+                tasks: ['copy:build','attachCopyright:js']
             },
             sass: {
                 files: [
