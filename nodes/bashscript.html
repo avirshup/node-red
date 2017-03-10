@@ -1,11 +1,11 @@
-<script type="text/x-red" data-help-name="python-function">
-    <p>Python code editor for YOUR MOTHER</p>
+<script type="text/x-red" data-help-name="bash-script">
+    <p>Bash code editor for YOUR MOTHER</p>
 </script>
 
 
-<script type="text/x-red" data-template-name="python-function">
+<script type="text/x-red" data-template-name="bash-script">
     <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> <span>Task name</span></label>
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span>Task name:</span></label>
         <input type="text" id="node-input-name">
     </div>
     <div class="form-row">
@@ -13,7 +13,7 @@
         <input type="text" id="node-input-docker">
     </div>
     <div class="form-row" style="margin-bottom: 0px;">
-        <label for="node-input-func"><i class="fa fa-wrench"></i> <span data-i18n="python-function.label.python-function"></span></label>
+        <label for="node-input-func"><i class="fa fa-wrench"></i> <span data-i18n="bash-script.label.bash-script"></span></label>
         <input type="hidden" id="node-input-func" autofocus="autofocus">
         <input type="hidden" id="node-input-noerr">
     </div>
@@ -22,20 +22,20 @@
     </div>
     <div class="form-row">
         <label for="node-input-outputs"><i class="fa fa-random"></i> <span data-i18n="function.label.outputs"></span></label>
-        <input id="node-input-outputs" style="width: 60px;" value="1">
+        <input id="node-input-outputs" style="width: 60px;" value="1"> <!-- Need to specify output files -->
     </div>
-    <div class="form-tips"><span data-i18n="python-function.tip"></span></div>
+    <div class="form-tips"><span data-i18n="bash-script.tip"></span></div>
 </script>
 
 
 <script type="text/javascript">
-  RED.nodes.registerType('python-function',{
-    color:"#96fda5",
+  RED.nodes.registerType('bash-script',{
+    color:"#fd9da3",
     category: 'task',
     defaults: {
-      name: {value:"python task"},
-      func: {value:"def my_function(input):\n   return {'output':None}"},
-      docker: {value:"docker.io/python:2.7-slim"},
+      name: {value:"bash task"},
+      func: {value:"echo Hello world"},
+      docker: {value:"docker.io/debian:jessie"},
       outputs: {value:1},
       noerr: {value:0,required:true,validate:function(v){ return ((!v) || (v === 0)) ? true : false; }}
     },
@@ -53,7 +53,7 @@
 
       this.editor = RED.editor.createEditor({
         id: 'node-input-func-editor',
-        mode: 'ace/mode/python',
+        mode: 'ace/mode/sh',
         value: $("#node-input-func").val(),
         globals: {
           msg:true,
@@ -75,7 +75,7 @@
         url:"functions", // where to get the data from
         type:"function", // the type of object the library is for
         editor:this.editor, // the field name the main text body goes to
-        mode:"ace/mode/python",
+        mode:"ace/mode/sh",
         fields:['name','outputs']
       });
       this.editor.focus();

@@ -3,9 +3,8 @@ module.exports = function(RED) {
     RED.nodes.createNode(this,config);
     var node = this;
     this.on('input', function(msg) {
-      msg.payload = msg.payload.toLowerCase();
-      node.send(msg);
+       // does nothing. But this could probably run interactively!?
     });
   }
-  RED.nodes.registerType("python",PythonFunctionNode);
+  RED.nodes.registerType("bash-script",PythonFunctionNode);
 }
